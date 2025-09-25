@@ -1,5 +1,11 @@
 import express from "express";
 import multer from "multer";
+import {
+  uploadCSV,
+  getBooks,
+  updateBook,
+  deleteAll,
+} from "../controllers/book.controllers.js";
 
 const router = express.Router();
 const upload = multer();
