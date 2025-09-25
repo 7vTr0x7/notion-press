@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { config } from "dotenv";
 import { initializeDB } from "./db/db.connect.js";
+import bookRouter from "./routes/book.routes.js";
 
 config();
 const app = express();
@@ -16,6 +17,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.use("/api", bookRouter);
 
 initializeDB();
 

@@ -1,0 +1,21 @@
+import express from "express";
+import multer from "multer";
+import {
+  uploadCSV,
+  getBooks,
+  updateBook,
+  deleteAll,
+} from "../controllers/bookController.js";
+
+const router = express.Router();
+const upload = multer();
+
+router.post("/upload", upload.single("file"), uploadCSV);
+
+router.get("/", getBooks);
+
+router.put("/:id", updateBook);
+
+router.delete("/", deleteAll);
+
+export default router;
