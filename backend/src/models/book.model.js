@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const bookSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  genre: String,
-  publishedYear: Number,
-  isbn: String,
+  title: { type: String, default: "" },
+  author: { type: String, default: "" },
+  genre: { type: String, default: "" },
+  publishedYear: { type: Number, default: null },
+  isbn: { type: String, default: "" },
 });
 
 export default mongoose.model("Book", bookSchema);
