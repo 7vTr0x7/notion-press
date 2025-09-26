@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { downloadCSVFromData } from "./utils/csv";
 
-const API_BASE = import.meta.env.VITE_API_BASE ;
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export default function App() {
   const [originalMap, setOriginalMap] = useState({});
@@ -74,10 +74,17 @@ export default function App() {
     try {
       const form = new FormData();
       form.append("file", file);
-      await axios.post(`${API_BASE}/books/upload`, form, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      toast.success("CSV Uploaded successfully!");
+      await toast.promise(
+        axios.post(`${API_BASE}/books/upload`, form, {
+          headers: { "Content-Type": "multipart/form-data" },
+        }),
+        {
+          loading: "Uploading CSV...",
+          success: "CSV uploaded successfully!",
+          error: "Upload failed",
+        }
+      );
+      fetchPage(1);
       fetchPage(1);
     } catch {
       toast.error("Upload failed");
